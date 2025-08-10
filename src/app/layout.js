@@ -1,56 +1,60 @@
-import React from "react";
-// Removed imports for next/font/google, globals.css, and react-icons/fa to fix compilation errors.
-// Replaced with inline SVGs and Tailwind's font-sans.
+"use client";
+import React, { useState } from "react";
 import './globals.css'; // Ensure this is still imported for global styles
 
-export const metadata = {
-  title: "IDEAZ | Innovative Solutions",
-  description: "Creative digital agency specializing in web development, design, and marketing.",
-};
 
 export default function RootLayout({ children }) {
+  const [navOpen, setNavOpen] = useState(false);
+
   return (
-    <html className={`font-sans bg-gray-950 antialiased text-white min-h-screen animated-bg`}>
+    <html className="font-sans bg-gray-950 antialiased text-white min-h-screen">
       <body>
-        {/* Header must be inside <body> */}
-        <header className="bg-gray-900/50 backdrop-blur-sm sticky top-0 z-50 py-5 px-8 flex justify-between items-center animate-fade-in-down transition-all duration-300 shadow-xl border-b border-gray-800">
-          <div className="font-extrabold text-2xl tracking-tight flex items-center gap-2">
-            <span className="text-cyan-400">IDEAZ</span>
-            <span className="text-xs font-thin text-blue-100">Digital Creativity</span>
+        <nav className="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
+          <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+            <a href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
+              <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">IDEAZ</span>
+            </a>
+            <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+              <a href="/services" className="hidden md:inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                  Get started
+                </button>
+              </a>
+              <button
+                type="button"
+                className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                aria-controls="navbar-sticky"
+                aria-expanded={navOpen}
+                onClick={() => setNavOpen((v) => !v)}
+              >
+                <span className="sr-only">Open main menu</span>
+                <svg className="w-5 h-5" aria-hidden="true" fill="none" viewBox="0 0 17 14">
+                  <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15"/>
+                </svg>
+              </button>
+            </div>
+            <div className={`items-center justify-between w-full md:flex md:w-auto md:order-1 ${navOpen ? '' : 'hidden'}`} id="navbar-sticky">
+              <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                <li>
+                  <a href="/" className="block py-2 px-3 text-white bg-blue-700 rounded-sm md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500" aria-current="page">Home</a>
+                </li>
+                <li>
+                  <a href="/about-us" className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About</a>
+                </li>
+                <li>
+                  <a href="/services" className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Services</a>
+                </li>
+                <li>
+                  <a href="/contact-us" className="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Contact</a>
+                </li>
+              </ul>
+            </div>
           </div>
-          <nav className="flex items-center gap-8">
-            {/* Nav links with a hover-underline animation */}
-            {["Home","Services","About Us","Contact Us"].map(p => (
-              <a key={p}
-                href={p === "Home" ? "/" : `/${p.toLowerCase().replace(/\s+/g,"-")}`}
-                className="relative text-gray-300 hover:text-cyan-400 transition-colors after:content-[''] after:block after:h-[2px] after:bg-cyan-400 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left"
-              >{p}</a>
-            ))}
-            <a href="/get-quote" className="ml-4 bg-cyan-500 text-gray-900 rounded-full px-5 py-2 font-bold shadow-md hover:bg-cyan-400 transition-all transform hover:scale-105">Get a Quote</a>
-          </nav>
-          <style dangerouslySetInnerHTML={{__html: `
-            @keyframes gradientPulse {
-              0% { background-position: 0% 50%; }
-              50% { background-position: 100% 50%; }
-              100% { background-position: 0% 50%; }
-            }
-            .animated-bg {
-              background: radial-gradient(circle at top left, #1f2937, #111827 75%);
-              background-size: 200% 200%;
-              animation: gradientPulse 15s ease infinite;
-            }
-          `}} />
-        </header>
+        </nav>
+        <main className="pt-20">{children}</main>
 
-        <main>
-          {children}
-        </main>
-
-        {/* The footer has a rounded top edge, a border, and a shadow.
-          'animate-fade-in-up' makes it slide in from the bottom.
-        */}
-        <footer className="bg-gradient-to-tr from-gray-950 via-gray-900 to-gray-800 rounded-t-3xl shadow-inner py-12 px-8 mt-20 border-t border-gray-800 animate-fade-in-up">
-          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 text-gray-300">
+        <footer className="bg-gradient-to-tr from-gray-950 via-gray-900 to-gray-800 rounded-t-3xl shadow-inner py-8 md:py-12 px-2 md:px-8 mt-10 md:mt-20 border-t border-gray-800 animate-fade-in-up">
+          <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-gray-300">
             <div>
               <h3 className="font-bold text-lg mb-2 text-cyan-400">IDEAZ HQ</h3>
               <p>
@@ -79,7 +83,7 @@ export default function RootLayout({ children }) {
             </div>
             <div>
               <h4 className="font-semibold mb-2 text-cyan-300">Social Networks</h4>
-              <div className="flex gap-4 mt-3 text-2xl">
+              <div className="flex gap-4 mt-3 text-2xl flex-wrap">
                 {/* Replaced react-icons with inline SVG for compatibility */}
                 <a href="https://twitter.com/Ideaz272904" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 transition-transform duration-300 hover:scale-125">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.36-.83.5-1.75.85-2.73 1.04C18.12 4.68 17.15 4 16.08 4c-2.35 0-4.27 1.9-4.27 4.26 0 .33.04.66.12.97-3.55-.18-6.7-1.89-8.81-4.48-.37.64-.58 1.39-.58 2.21 0 1.48.75 2.8 1.91 3.56-.7-.01-1.35-.22-1.92-.53v.06c0 2.07 1.47 3.8 3.42 4.2-.36.1-.73.15-1.12.15-.27 0-.53-.03-.79-.08.54 1.7 2.11 2.94 3.97 2.97C6.37 19.34 4.5 20 2.45 20c-.4 0-.79-.02-1.18-.07C2.26 21.09 4.67 22 7.21 22c8.2 0 12.7-6.8 12.7-12.7V9.7c.87-.63 1.62-1.42 2.21-2.31z"/></svg>
@@ -96,7 +100,7 @@ export default function RootLayout({ children }) {
               </div>
             </div>
           </div>
-          <div className="mt-8 text-center border-t border-gray-800 pt-4 text-sm text-gray-500">
+          <div className="mt-6 md:mt-8 text-center border-t border-gray-800 pt-4 text-xs md:text-sm text-gray-500">
             &copy; {new Date().getFullYear()} <strong className="text-cyan-400">IDEAZ</strong>. All Rights Reserved.<br />
             <span>Designed by Developer team</span>
           </div>

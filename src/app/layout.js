@@ -53,13 +53,32 @@ export default function RootLayout({ children }) {
         </nav>
         <main className="pt-20">{children}</main>
 
+        {/* WhatsApp Floating Button */}
+        <a
+          href="https://wa.me/918300707692?text=Hello%20IDEAZ%2C%20I%20would%20like%20to%20know%20more%20about%20your%20services."
+          target="_blank"
+          rel="noopener noreferrer"
+          className="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 rounded-full shadow-lg p-4 flex items-center justify-center transition-all"
+          title="Contact us on WhatsApp"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            fill="white"
+            viewBox="0 0 24 24"
+          >
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.967-.94 1.166-.173.199-.347.223-.644.075-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.298-.018-.458.13-.606.134-.133.298-.347.447-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.611-.916-2.207-.242-.579-.487-.501-.669-.511-.173-.008-.372-.01-.571-.01-.198 0-.52.074-.792.372-.272.298-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.099 3.205 5.077 4.378.711.306 1.263.489 1.694.625.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zm-5.421 7.617h-.001a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.999-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.455 4.436-9.89 9.893-9.89 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.991c-.002 5.455-4.437 9.89-9.893 9.89zm8.413-18.304A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.893c0 2.096.547 4.142 1.588 5.945L0 24l6.305-1.675a11.86 11.86 0 005.741 1.463h.005c6.554 0 11.89-5.335 11.893-11.893a11.82 11.82 0 00-3.484-8.463z"/>
+          </svg>
+        </a>
+
         <footer className="bg-gradient-to-tr from-gray-950 via-gray-900 to-gray-800 rounded-t-3xl shadow-inner py-8 md:py-12 px-2 md:px-8 mt-10 md:mt-20 border-t border-gray-800 animate-fade-in-up">
           <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-gray-300">
             <div>
               <h3 className="font-bold text-lg mb-2 text-cyan-400">IDEAZ HQ</h3>
               <p>
                 COIMBATORE<br/>
-                <strong>Phone:</strong> <span className="text-cyan-400">8300864083</span><br/>
+                <strong>Phone:</strong> <span className="text-cyan-400">8300707692</span><br/>
                 <strong>Email:</strong> <span className="text-cyan-400">ideazdevelop27@gmail.com</span>
               </p>
             </div>

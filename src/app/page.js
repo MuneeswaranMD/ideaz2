@@ -1,5 +1,6 @@
 'use client';
 import React from "react";
+import Head from "next/head";
 import ThreeScene from "./ThreeScene";
 import Services from "./services/page";
 import Contact from "./contact-us/page";
@@ -8,6 +9,13 @@ import AboutUs from "./about-us/page";
 export default function Home() {
   return (
     <div className="font-sans min-h-screen flex flex-col">
+      <Head>
+        <title>IDEAZ - We Build, You Grow</title>
+        <meta
+          name="description"
+          content="IDEAZ delivers visual experiences and robust digital solutions—shaping ideas into inspiring business realities. Explore our services, meet our team, and contact us today!"
+        />
+      </Head>
       <main className="animate-fade-in-up">
         <div className="w-full flex justify-center items-center mb-8" style={{ minHeight: 250 }}>
           <ThreeScene />

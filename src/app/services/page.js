@@ -1,10 +1,14 @@
 "use client";
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { db } from "../firebase.js";
+import { collection, getDocs } from "firebase/firestore";
 import { Gem, Rocket, Palette, LineChart, Quote } from 'lucide-react'; // Import professional icons
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
 
 export default function Services() {
+  const [testimonials, setTestimonials] = useState([]);
+
   // Use a useEffect hook to dynamically add the AOS library and its CSS
   useEffect(() => {
     // Check if AOS script is already present to avoid multiple loads
@@ -33,6 +37,19 @@ export default function Services() {
       };
       document.body.appendChild(aosScript);
     }
+
+    // Fetch testimonials from Firestore
+    async function fetchTestimonials() {
+      try {
+        const querySnapshot = await getDocs(collection(db, "testimonials"));
+        const testimonialsData = querySnapshot.docs.map(doc => doc.data());
+        setTestimonials(testimonialsData);
+      } catch (error) {
+        // Handle error or show fallback
+        setTestimonials([]);
+      }
+    }
+    fetchTestimonials();
   }, []);
 
   return (
@@ -174,41 +191,34 @@ export default function Services() {
             <h2 className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-indigo-500 mb-6">
               What Our Clients Say
             </h2>
+            <p className="text-gray-400 text-lg mt-4">
+              Have feedback or a story to share? <a href="/client-feedback" className="text-cyan-400 underline hover:text-cyan-300">Click here to submit your testimonial!</a>
+            </p>
           </div>
           
           <div className="max-w-4xl mx-auto grid gap-10 lg:grid-cols-2">
-            
-            {/* Testimonial Card 1 */}
-            <article
-              className="p-8 rounded-xl shadow-lg bg-gray-950 border border-gray-800"
-              data-aos="fade-up"
-              data-aos-delay="150"
-            >
-              <Quote className="text-cyan-600 mb-4" size={48} strokeWidth={1.5} />
-              <p className="mb-6 text-gray-400 text-lg italic leading-relaxed">
-                “IDEAZ delivered our new website on time and exceeded our expectations—
-                highly recommended!”
-              </p>
-              <h5 className="font-semibold text-xl text-cyan-400">
-                - S. Kumar, <span className="text-gray-500 font-normal">Founder, TechWare Solutions</span>
-              </h5>
-            </article>
-            
-            {/* Testimonial Card 2 */}
-            <article
-              className="p-8 rounded-xl shadow-lg bg-gray-950 border border-gray-800"
-              data-aos="fade-up"
-              data-aos-delay="250"
-            >
-              <Quote className="text-cyan-600 mb-4" size={48} strokeWidth={1.5} />
-              <p className="mb-6 text-gray-400 text-lg italic leading-relaxed">
-                “Their digital marketing services ramped up our leads by 300% in six months!”
-              </p>
-              <h5 className="font-semibold text-xl text-cyan-400">
-                - Priya R., <span className="text-gray-500 font-normal">Marketing Manager, HealthPlus</span>
-              </h5>
-            </article>
-            
+            {testimonials.length > 0 ? (
+              testimonials.map((t, idx) => (
+                <article
+                  key={idx}
+                  className="p-8 rounded-xl shadow-lg bg-gray-950 border border-gray-800"
+                  data-aos="fade-up"
+                  data-aos-delay={150 + idx * 100}
+                >
+                  <Quote className="text-cyan-600 mb-4" size={48} strokeWidth={1.5} />
+                  <p className="mb-6 text-gray-400 text-lg italic leading-relaxed">
+                    “{t.testimonial}”
+                  </p>
+                  <h5 className="font-semibold text-xl text-cyan-400">
+                    - {t.name}, <span className="text-gray-500 font-normal">{t.company}</span>
+                  </h5>
+                </article>
+              ))
+            ) : (
+              <div className="text-gray-400 text-center col-span-2">
+                No testimonials yet. Be the first to share your experience!
+              </div>
+            )}
           </div>
         </div>
       </section>

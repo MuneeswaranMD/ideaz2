@@ -95,21 +95,12 @@ export default function Contact() {
             </span>
             <div>
               <h4 className="font-semibold mb-0">Email</h4>
-              <p className="mb-0 text-gray-300">ideazdevelop27@gmail.com</p>
+              <p className="mb-0 text-gray-300">hr@ideaz.org.in</p>
             </div>
           </div>
           
           {/* Phone details */}
-          <div className="flex items-start mb-3">
-            <span className="mr-3 text-2xl text-cyan-400">
-              {/* Inline SVG for phone icon */}
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.46.57 3.57.12.35.03.75-.24 1.02l-2.2 2.2z"/></svg>
-            </span>
-            <div>
-              <h4 className="font-semibold mb-0">Call</h4>
-              <p className="mb-0 text-gray-300">+91 8300864083</p>
-            </div>
-          </div>
+         
         </div>
         
         {/* Contact Form section */}
